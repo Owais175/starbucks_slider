@@ -9,8 +9,8 @@ let other_2 = null;
 next.onclick = () => {
     carousel.classList.remove('prev');
     carousel.classList.add('next');
-    active =active + 1 >= countItem ? 0 : active + 1;
-    other_1 =active - 1 < 0 ? countItem -1 : active - 1;
+    active = active + 1 >= countItem ? 0 : active + 1;
+    other_1 = active - 1 < 0 ? countItem - 1 : active - 1;
     other_2 = active + 1 >= countItem ? 0 : active + 1;
     changeSlider();
 }
@@ -24,13 +24,13 @@ prev.onclick = () => {
 }
 const changeSlider = () => {
     let itemOldActive = document.querySelector('.carousel .item.active');
-    if(itemOldActive) itemOldActive.classList.remove('active');
+    if (itemOldActive) itemOldActive.classList.remove('active');
 
     let itemOldOther_1 = document.querySelector('.carousel .item.other_1');
-    if(itemOldOther_1) itemOldOther_1.classList.remove('other_1');
+    if (itemOldOther_1) itemOldOther_1.classList.remove('other_1');
 
     let itemOldOther_2 = document.querySelector('.carousel .item.other_2');
-    if(itemOldOther_2) itemOldOther_2.classList.remove('other_2');
+    if (itemOldOther_2) itemOldOther_2.classList.remove('other_2');
 
     items.forEach(e => {
         e.querySelector('.image img').style.animation = 'none';
@@ -47,8 +47,18 @@ const changeSlider = () => {
     clearInterval(autoPlay);
     autoPlay = setInterval(() => {
         next.click();
-    }, 5000);
+    }, 1000);
 }
 let autoPlay = setInterval(() => {
     next.click();
-}, 5000);
+}, 1000);
+
+carousel.addEventListener('mouseenter', () => {
+    clearInterval(autoPlay);
+});
+
+carousel.addEventListener('mouseleave', () => {
+    autoPlay = setInterval(() => {
+        next.click();
+    }, 1000);
+});
